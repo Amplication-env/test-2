@@ -12,3 +12,10 @@ COPY    --from=builder --chown=node:node /usr/src/app .
 ENV     PORT=3030
 
 CMD     npm run start:$APP_ENV
+Y --from=base /app/scripts ./scripts
+COPY --from=base /app/src ./src
+COPY --from=base /app/tsconfig* ./
+
+EXPOSE 3000
+
+CMD [ "node", "./dist/main"]
